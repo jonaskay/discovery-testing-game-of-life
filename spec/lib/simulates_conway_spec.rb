@@ -1,8 +1,5 @@
 require 'simulates_conway'
-require 'world'
-require 'generates_seed_world'
-require 'replaces_world'
-require 'outputs_world'
+require 'values/world'
 
 RSpec.describe 'SimulatesConway' do 
   let(:subject) { SimulatesConway }

@@ -7,8 +7,8 @@ class ReplacesWorld
     cells_to_replace = [Coordinates.new(0,0)]
     while !cells_to_replace.empty? && !time_limit.times_up? 
       coordinates = cells_to_replace.shift
-      outcome = ReplacesCell.replace(coordinates.x, coordinates.y, old_world)
-      new_world.set(coordinates.x, coordinates.y, outcome.next_contents)
+      outcome = ReplacesCell.replace(coordinates, old_world)
+      new_world.set(coordinates, outcome.next_contents)
       cells_to_replace.push(*outcome.neighbors)
     end
     new_world

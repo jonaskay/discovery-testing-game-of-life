@@ -19,7 +19,7 @@ RSpec.describe ReplacesWorld do
     next_contents = Contents.new
     outcome = Outcome.new(next_contents, [])
     coordinates = Coordinates.new(0, 0)
-    allow(replaces_cell).to receive(:replace).with(coordinates.x, coordinates.y, world1).and_return(outcome)
+    allow(replaces_cell).to receive(:replace).with(coordinates, world1).and_return(outcome)
 
     result = described_class.replace(world1, 42)
 
@@ -35,10 +35,10 @@ RSpec.describe ReplacesWorld do
     neighbors = [Coordinates.new(50,50)]
     outcome = Outcome.new(next_contents, neighbors)
     coordinates = Coordinates.new(0, 0)
-    allow(replaces_cell).to receive(:replace).with(coordinates.x, coordinates.y, world1).and_return(outcome)
+    allow(replaces_cell).to receive(:replace).with(coordinates, world1).and_return(outcome)
     next_contents2 = Contents.new 
     outcome2 = Outcome.new(next_contents2, [])
-    allow(replaces_cell).to receive(:replace).with(Coordinates.new(50,50).x, Coordinates.new(50,50).y, world1).and_return(outcome2)    
+    allow(replaces_cell).to receive(:replace).with(Coordinates.new(50, 50), world1).and_return(outcome2)    
 
     result = described_class.replace(world1, 42)
 

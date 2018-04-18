@@ -4,9 +4,9 @@ require 'replace/outcome'
 require 'replace/coordinates'
 
 class ReplacesCell
-  def self.replace(x, y, world)
-    neighbors = GathersNeighbors.gather(x, y, world)
-    new_contents = DeterminesNextContents.determine(world.at(Coordinates.new(x, y)), neighbors)
+  def self.replace(coordinates, world)
+    neighbors = GathersNeighbors.gather(coordinates, world)
+    new_contents = DeterminesNextContents.determine(world.at(coordinates), neighbors)
     Outcome.new(new_contents, neighbors)
   end
 end

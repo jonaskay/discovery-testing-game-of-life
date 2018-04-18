@@ -1,4 +1,4 @@
 class GathersNeighbors
-  def self.gather(x, y, world)
+  def self.gather(coordinates, world)
   end
 end

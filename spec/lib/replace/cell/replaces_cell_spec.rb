@@ -10,13 +10,14 @@ RSpec.describe ReplacesCell do
   it "" do 
     world = MutableWorld.new()
     old_contents = Contents.new
-    world.set(1337, 1337, old_contents)
+    coordinates = Coordinates.new(1337, 1337)
+    world.set(coordinates, old_contents)
     neighbors = []
-    allow(gathers_neighbors).to receive(:gather).with(1337, 1337, world).and_return(neighbors)
+    allow(gathers_neighbors).to receive(:gather).with(coordinates, world).and_return(neighbors)
     new_contents = Contents.new
     allow(determines_next_contents).to receive(:determine).with(old_contents, neighbors).and_return(new_contents)
 
-    result = described_class.replace(1337, 1337, world)
+    result = described_class.replace(coordinates, world)
 
     expect(result.neighbors).to eq(neighbors)
     expect(result.next_contents).to eq(new_contents)

@@ -1,8 +1,7 @@
 require 'simulates_conway'
 require 'values/world'
 
-RSpec.describe 'SimulatesConway' do 
-  let(:subject) { SimulatesConway }
+RSpec.describe SimulatesConway do 
   let(:generates_seed_world) { class_double('GeneratesSeedWorld').as_stubbed_const }
   let(:replaces_world) { class_double('ReplacesWorld').as_stubbed_const }
   let(:outputs_world) { class_double('OutputsWorld').as_stubbed_const }
@@ -13,7 +12,7 @@ RSpec.describe 'SimulatesConway' do
 
     expect(outputs_world).to receive(:output).with(seed_world)
 
-    subject.simulate(0, 1337)
+    described_class.simulate(0, 1337)
   end 
 
   it "outputs a world after 1 generation" do 
@@ -25,6 +24,6 @@ RSpec.describe 'SimulatesConway' do
     expect(outputs_world).to receive(:output).with(seed_world)
     expect(outputs_world).to receive(:output).with(world2)
 
-    subject.simulate(1, 1337)
+    described_class.simulate(1, 1337)
   end
 end 

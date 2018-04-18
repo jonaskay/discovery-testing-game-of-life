@@ -1,14 +1,13 @@
 require 'replace/replaces_world'
 require 'replace/keeps_time'
-require 'replace/replaces_cell'
+require 'replace/cell/replaces_cell'
 require 'replace/outcome'
 require 'replace/coordinates'
 require 'replace/contents'
 require 'values/world'
 require 'values/mutable_world'
 
-RSpec.describe 'ReplacesWorld' do
-  let(:subject) { ReplacesWorld } 
+RSpec.describe ReplacesWorld do
   let(:keeps_time) { class_double('KeepsTime').as_stubbed_const }
   let(:replaces_cell) { class_double('ReplacesCell').as_stubbed_const }
 
@@ -22,7 +21,7 @@ RSpec.describe 'ReplacesWorld' do
     coordinates = Coordinates.new(0, 0)
     allow(replaces_cell).to receive(:replace).with(coordinates.x, coordinates.y, world1).and_return(outcome)
 
-    result = subject.replace(world1, 42)
+    result = described_class.replace(world1, 42)
 
     expect(result.at(coordinates)).to eq(next_contents)     
   end
@@ -41,7 +40,7 @@ RSpec.describe 'ReplacesWorld' do
     outcome2 = Outcome.new(next_contents2, [])
     allow(replaces_cell).to receive(:replace).with(Coordinates.new(50,50).x, Coordinates.new(50,50).y, world1).and_return(outcome2)    
 
-    result = subject.replace(world1, 42)
+    result = described_class.replace(world1, 42)
 
     expect(result.at(coordinates)).to eq(next_contents)   
     expect(result.at(Coordinates.new(50,50))).to eq(next_contents2)  
